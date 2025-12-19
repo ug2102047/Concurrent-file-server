@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>File Server Dashboard</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="site-header">
+	<h1>Concurrent File Server Dashboard</h1>
+	<p class="subtitle">Files, logs and downloads — professional view</p>
+</header>
+
+<main class="container">
+	<section class="card files-card">
+		<h2>Available Files</h2>
+		<ul id="file-list" class="file-list"></ul>
+	</section>
+
+	<section class="card logs-card">
+		<h2>Server Logs</h2>
+		<div id="log-box" class="log-box"></div>
+	</section>
+</main>
+
+
+<script>
+function updateFiles() {
+	fetch('/api/files').then(r => r.json()).then(data => {
+		let list = document.getElementById("file-list");
+		if (!data || data.length === 0) {
+			list.innerHTML = '<li><em>No files available</em></li>';
+			return;
+		}
+
+		list.innerHTML = data.map(f => {
+			const url = `/download/${encodeURIComponent(f)}`;
+			return `<li class="file-row"><span class="fname">${f}</span> <a class="btn" href="${url}">Download</a></li>`;
+		}).join('');
+	}).catch(() => {
+		document.getElementById("file-list").innerHTML = '<li><em>Unable to fetch files</em></li>';
+	});
+}
+
+let lastLogHtml = '';
+function refreshLogsAndScroll() {
+	fetch('/api/logs').then(r => r.json()).then(data => {
+		const logBox = document.getElementById('log-box');
+		const html = data.map(l => `<div class="log-line">${l}</div>`).join('');
+		if (html !== lastLogHtml) {
+			logBox.innerHTML = html;
+			logBox.scrollTop = logBox.scrollHeight;
+			lastLogHtml = html;
+		}
+	}).catch(() => {});
+}
+
+// Polling intervals
+setInterval(refreshLogsAndScroll, 600);
+setInterval(updateFiles, 2000);
+
+// initial load
+updateFiles();
+refreshLogsAndScroll();
+</script>
+</body>
+</html>

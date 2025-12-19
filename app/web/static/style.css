@@ -1,0 +1,109 @@
+:root {
+  /* Light-blue -> Dark-blue gradient theme */
+  --bg-start: #7dd3fc; /* light sky blue */
+  --bg-end: #0b3d91; /* deep dark blue */
+  --card-bg: rgba(255, 255, 255, 0.04);
+  --muted: rgba(230, 245, 255, 0.78);
+  --accent: #38bdf8; /* bright blue accent */
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  color: #e6f7ff;
+  background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+}
+
+.site-header {
+  text-align: center;
+  padding: 28px 12px 8px 12px;
+}
+.site-header h1 {
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: 0.6px;
+}
+.site-header .subtitle {
+  color: var(--muted);
+  margin-top: 6px;
+  font-size: 13px;
+}
+
+.container {
+  display: flex;
+  gap: 28px;
+  justify-content: center;
+  padding: 28px;
+  box-sizing: border-box;
+}
+
+.card {
+  background: var(--card-bg);
+  min-width: 360px;
+  max-width: 520px;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 8px 24px rgba(2, 6, 23, 0.45);
+  backdrop-filter: blur(6px);
+}
+
+.files-card h2,
+.logs-card h2 {
+  margin-top: 0;
+  color: #ffffff;
+}
+
+.file-list {
+  list-style: none;
+  padding-left: 12px;
+  margin: 0;
+}
+.file-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+.fname {
+  color: #dbeafe;
+}
+.btn {
+  background: linear-gradient(90deg, var(--accent), #0b66c3);
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: #041028;
+  text-decoration: none;
+  font-weight: 700;
+}
+.btn:hover {
+  opacity: 0.95;
+}
+
+.log-box {
+  height: 520px;
+  overflow: auto;
+  padding: 8px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+  border-radius: 8px;
+}
+.log-line {
+  font-family: monospace;
+  font-size: 13px;
+  color: var(--muted);
+  padding: 6px 4px;
+}
+
+/* responsive */
+@media (max-width: 1000px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .card {
+    width: 92%;
+    max-width: none;
+  }
+}
