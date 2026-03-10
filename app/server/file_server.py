@@ -74,7 +74,7 @@ def file_transfer_thread(filename, conn, addr):
 
     finally:
         try:
-            conn.close()
+            conn.close() 
         except Exception:
             pass
         if addr in ACTIVE_CLIENTS:
