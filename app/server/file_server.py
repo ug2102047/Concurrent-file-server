@@ -79,4 +79,4 @@ def file_transfer_thread(filename, conn, addr):
             pass
         if addr in ACTIVE_CLIENTS:
             ACTIVE_CLIENTS.remove(addr)
-        log_event(f"Client disconnected: {addr}")
+        log_event(f"Client disconnected: {addr}") 
