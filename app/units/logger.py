@@ -1,5 +1,5 @@
 from datetime import datetime
-
+ 
 LOG_DATA = []
 
 def log_event(message):
