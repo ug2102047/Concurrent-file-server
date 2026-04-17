@@ -3,7 +3,7 @@ import threading
 import time
 import os
 from app.units.logger import log_event
-
+ 
 HOST = "127.0.0.1"
 PORT = 5050
 ACTIVE_CLIENTS = []
